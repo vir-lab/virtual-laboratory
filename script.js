@@ -188,3 +188,4 @@ function initParticles() {
         particlesContainer.appendChild(particle);
     }
 }
+

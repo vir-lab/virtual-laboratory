@@ -601,6 +601,10 @@ button {
     animation-delay: 0.6s;
 }
 
+.delay-4 {
+    animation-delay: 0.8s;
+}
+
 @keyframes fadeUp {
     to {
         opacity: 1;
@@ -657,6 +661,63 @@ button {
     box-shadow: 0 0 40px rgba(99, 102, 241, 0.2);
     max-width: 50%;
     margin: 0 auto;
+    display: block;
+    /* Ensure anchor tag behaves like block */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    /* Subtle border base */
+}
+
+/* Cyber Decoration for About Image (decoration-target) */
+.about-image-container::before,
+.about-image-container::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    /* Larger accents for main image */
+    height: 40px;
+    transition: var(--transition-base);
+    z-index: 2;
+    pointer-events: none;
+}
+
+.about-image-container::before {
+    top: 0;
+    left: 0;
+    border-top: 3px solid var(--color-accent-primary);
+    border-left: 3px solid var(--color-accent-primary);
+    border-top-left-radius: var(--radius-2xl);
+}
+
+.about-image-container::after {
+    bottom: 0;
+    right: 0;
+    border-bottom: 3px solid var(--color-accent-tertiary);
+    border-right: 3px solid var(--color-accent-tertiary);
+    border-bottom-right-radius: var(--radius-2xl);
+}
+
+/* Additional tech decoration: Scanline Overlay */
+.about-image-container .scanline {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            transparent 50%,
+            rgba(99, 102, 241, 0.05) 51%);
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.about-image-container:hover::before,
+.about-image-container:hover::after {
+    width: 60px;
+    height: 60px;
+    filter: drop-shadow(0 0 5px var(--color-accent-primary));
+}
+
+.about-image-container:hover {
+    box-shadow: 0 0 60px rgba(99, 102, 241, 0.4);
+    border-color: rgba(99, 102, 241, 0.3);
 }
 
 .about-image {
@@ -1252,4 +1313,225 @@ button {
 .reveal.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* ============================================
+   Works Section
+   ============================================ */
+.works {
+    padding: var(--space-24) 0;
+    position: relative;
+    background: #0f0f15;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.works-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-12);
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.works-poster-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-6);
+    margin: var(--space-12) 0 var(--space-20);
+}
+
+.works-poster-card {
+    position: relative;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: var(--transition-base);
+}
+
+.works-poster-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+    border-color: var(--color-accent-primary);
+}
+
+.works-poster-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    /* This hides the date at the bottom */
+}
+
+.works-subtitle {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--color-accent-primary);
+    text-align: center;
+    margin-bottom: var(--space-10);
+    letter-spacing: 0.1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+}
+
+.works-subtitle::before,
+.works-subtitle::after {
+    content: '';
+    width: 30px;
+    height: 1px;
+    background: var(--gradient-primary);
+}
+
+.works-lead-text {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto var(--space-4);
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    line-height: 1.8;
+}
+
+@media (max-width: 1100px) {
+
+    .works-grid,
+    .works-poster-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+
+    .works-grid,
+    .works-poster-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+    .works-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.works-card {
+    position: relative;
+    border-radius: var(--radius-lg);
+    /* Slightly sharper corners */
+    overflow: hidden;
+    transition: var(--transition-base);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Decoration Frame */
+.works-card::before,
+.works-card::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    transition: var(--transition-base);
+    z-index: 2;
+}
+
+.works-card::before {
+    top: -1px;
+    left: -1px;
+    border-top: 2px solid var(--color-accent-primary);
+    border-left: 2px solid var(--color-accent-primary);
+}
+
+.works-card::after {
+    bottom: -1px;
+    right: -1px;
+    border-bottom: 2px solid var(--color-accent-tertiary);
+    border-right: 2px solid var(--color-accent-tertiary);
+}
+
+.works-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 30px rgba(99, 102, 241, 0.15);
+    border-color: rgba(99, 102, 241, 0.3);
+}
+
+.works-card:hover::before,
+.works-card:hover::after {
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+}
+
+.works-image-wrapper {
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+    position: relative;
+    background: radial-gradient(circle at center, rgba(99, 102, 241, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.works-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Logo specific styles */
+.works-image-logo {
+    object-fit: contain;
+    padding: var(--space-4);
+    width: 100%;
+    height: 100%;
+}
+
+.works-image-contain {
+    object-fit: contain;
+    padding: var(--space-4);
+    width: 100%;
+    height: 100%;
+}
+
+.works-card:hover .works-image {
+    transform: scale(1.05);
+}
+
+.works-info {
+    padding: var(--space-6);
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.03));
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.works-title {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    margin-bottom: var(--space-3);
+    color: var(--color-text-primary);
+    line-height: 1.4;
+    transition: color 0.3s ease;
+}
+
+.works-card:hover .works-title {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.works-desc {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    line-height: 1.7;
 }
